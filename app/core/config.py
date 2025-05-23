@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 from typing import List
 
 class Settings(BaseSettings):
@@ -8,9 +8,10 @@ class Settings(BaseSettings):
     jwks_url: str
     log_level: str = "INFO"
     cors_origins: List[str] = ["http://localhost:8001"]
-    database_url: str  # Postgres connection URL
+    database_url: str
 
     class Config:
         env_file = ".env"
-
+import os
+print("CORS_ORIGINS raw:", os.getenv("CORS_ORIGINS"))
 settings = Settings()
